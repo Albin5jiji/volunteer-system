@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Volunteer Identification</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="/fingerprint.svg" alt="" class="brand-mark">
+      <div>
+        <h1>Volunteer Identification</h1>
+        <p>Blood donation fingerprint screening</p>
+      </div>
+    </div>
+    <div class="stats" id="stats">
+      <span>Donors <strong>0</strong></span>
+      <span>Fingerprints <strong>0</strong></span>
+      <span>Open alerts <strong>0</strong></span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel scanner-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Fingerprint Check</h2>
+          <p id="deviceState">Ready</p>
+        </div>
+        <label class="threshold">
+          <span>Score</span>
+          <input id="threshold" type="number" min="40" max="100" value="80">
+        </label>
+      </div>
+
+      <div class="scan-stage" id="scanStage">
+        <img src="/fingerprint.svg" alt="" class="scan-print">
+        <div>
+          <strong id="scanTitle">Scan candidate</strong>
+          <span id="scanSubtitle">Place finger on the SecuGen reader</span>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button class="primary" id="scanButton" type="button">
+          <span class="icon">⌁</span>
+          Scan and check
+        </button>
+        <button id="manualButton" type="button">
+          <span class="icon">T</span>
+          Paste template
+        </button>
+      </div>
+
+      <div class="manual-box" id="manualBox" hidden>
+        <textarea id="manualTemplate" rows="5" placeholder="Paste fingerprint template for testing or SDK integration"></textarea>
+        <button id="useManualTemplate" type="button">Use template</button>
+      </div>
+
+      <div class="result" id="resultBox">
+        <h3>No scan yet</h3>
+        <p>Scan first, then register only when the candidate is clear.</p>
+      </div>
+    </section>
+
+    <section class="panel register-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Register Donor</h2>
+          <p id="registerState">Waiting for a clear fingerprint</p>
+        </div>
+      </div>
+
+      <form id="registerForm">
+        <div class="form-grid">
+          <label>
+            Full name
+            <input name="fullName" autocomplete="name" required>
+          </label>
+          <label>
+            Phone
+            <input name="phone" autocomplete="tel">
+          </label>
+          <label>
+            Age
+            <input name="age" type="number" min="16" max="80">
+          </label>
+          <label>
+            Blood group
+            <select name="bloodGroup">
+              <option value="">Unknown</option>
+              <option>A+</option><option>A-</option>
+              <option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option>
+              <option>O+</option><option>O-</option>
+            </select>
+          </label>
+          <label>
+            ID document
+            <input name="idDocument">
+          </label>
+          <label>
+            Finger
+            <select name="fingerPosition">
+              <option value="right_thumb">Right thumb</option>
+              <option value="left_thumb">Left thumb</option>
+              <option value="right_index">Right index</option>
+              <option value="left_index">Left index</option>
+            </select>
+          </label>
+          <label class="wide">
+            Address
+            <input name="address">
+          </label>
+          <label class="wide">
+            Notes
+            <textarea name="notes" rows="3"></textarea>
+          </label>
+        </div>
+        <button class="primary full" id="registerButton" type="submit" disabled>Register donor</button>
+      </form>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Recent Activity</h2>
+          <p>Latest checks and alerts</p>
+        </div>
+        <button id="refreshButton" type="button">Refresh</button>
+      </div>
+      <div class="activity-list" id="activityList"></div>
+    </section>
+
+    <section class="panel search-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Donor Search</h2>
+          <p>Name, phone, or donor code</p>
+        </div>
+      </div>
+      <div class="search-row">
+        <input id="searchInput" placeholder="Search donor database">
+        <button id="searchButton" type="button">Search</button>
+      </div>
+      <div class="donor-list" id="donorList"></div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
