@@ -123,4 +123,11 @@ Fingerprint templates are sensitive biometric information. For production deploy
 
 ## Project Structure
 
-volunteer-system/ ├── app.py ├── schema.sql ├── data/ │   └── volunteer_system.db ├── static/ ├── templates/ └── README.md
+volunteer-system/ 
+├── app.py 
+├── schema.sql 
+├── data/ 
+│   └── volunteer_system.db 
+├── static/ 
+├── templates/ 
+└── README.md
